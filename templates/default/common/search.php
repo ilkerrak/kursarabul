@@ -10,15 +10,15 @@ if(!isset($destination_name)) $destination_name = '';
 
 if(!isset($_SESSION['schoollevel_id'])) $_SESSION['schoollevel_id'] = 0;
 if(!isset($schoollevel_name)) $schoollevel_name = '';
-    
+
 if(!isset($_SESSION['num_adults']))
     $_SESSION['num_adults'] = (isset($_SESSION['book']['adults'])) ? $_SESSION['book']['adults'] : 1;
 if(!isset($_SESSION['num_children']))
     $_SESSION['num_children'] = (isset($_SESSION['book']['children'])) ? $_SESSION['book']['children'] : 0;
-    
+
 $from_date = (isset($_SESSION['from_date'])) ? $_SESSION['from_date'] : '';
 $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
-    
+
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
 
     <script>
@@ -41,11 +41,11 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
                 var $li = $('<li>');
 
                 $li.html('<a href="#">' +
-                '<span class="icon"><i class="fal fa-school"></i></span>' +      
-                '<span class="city">' + item.city+ ' / </span>' + 
-                '<span class="state">' + item.state+ ' - </span>' + 
+                '<span class="icon"><i class="fal fa-school"></i></span>' +
+                '<span class="city">' + item.city+ ' / </span>' +
+                '<span class="state">' + item.state+ ' - </span>' +
                 '<span class="username">' + item.value + '</span>'+
-                       
+
                         '</a>');
 
                 return $li.appendTo(ul);
@@ -55,36 +55,36 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
         });
     </script>
     <style>
-                
+
                 .ui-autocomplete li a span{
-                    
+
                     cursor:pointer;
                     background-color:#fff;
                     font-size:13px;
                     float:left;
-                    
+
                 }
                 .ui-autocomplete li a span.city{
-                   
+
                     margin-left:20px;
                 }
                 .ui-autocomplete li a span.username{
                     font-size:15px;
                     float:left;
-                    
+
                 }
-                
+
                 .ui-autocomplete li a span.icon{
                     font-size:15px;
                     float:left;
                     color:orange;
                                    }
                 @media screen and (max-width: 600px) {
-                
+
                 .ui-autocomplete li a span.username{
                     font-size:10px;
                     float:left;
-                    
+
                 }
                 .ui-autocomplete li a span.icon{
                     font-size:10px;
@@ -98,13 +98,13 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
                .ui-autocomplete li a span.city{
                     font-size:10px;
 
-                  
+
                }
                 }
-            
+
             </style>
-        
-             
+
+
 
 
 
@@ -116,8 +116,8 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
         <?php
     } ?>
     <div class="row">
-       
-                              
+
+
                                   <div class="main-search-input fl-wrap">
                                      <?php
                                         $nb_search_destinations = 0;
@@ -144,22 +144,22 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
                                                             echo '<option value="'.$row['id'].'"'.$selected.'>'.$row['name'].'</option>';
                                                         } ?>
                                                     </select>
-                                                </div>  
+                                                </div>
                                                     <?php
                                                 } ?>
-                                            
+
                                         </div>
-                                        
-                                                <?php 
+
+                                                <?php
                                                 }
                                             }?>
-                                        
-                                        
+
+
 
                                         <div class="main-search-input-item main-date-parent main-search-input-item_small">
-                                            <span class="inpt_dec"><i class="fas fa-calendar-check"></i></span> <input style="background:#f7f9fb !important;" type="text" placeholder="Aradığınız Kurs Merkezini Yazın"  id="autocompleteid3"   value=""/>
+                                            <span class="inpt_dec"><i class=""></i></span> <input style="background:#f7f9fb !important;" type="text" placeholder="Aradığınız Kurs Merkezini Yazın"  id="autocompleteid3"   value=""/>
                                         </div>
-                                        
+
                                         <?php
                                             $nb_search_schoollevels = 0;
                                             $result_search_schoollevel = $db->query('SELECT * FROM pm_schoollevel WHERE checked = 1 AND lang = '.LANG_ID);
@@ -187,7 +187,7 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
                                                                                 </div>
                                                                                 <?php
                                                                             } ?>
-                                                                        </div> 
+                                                                        </div>
                                                                         <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'" name="check_availabilities">Kurs Merkezi Ara <i class="fas fa-search"></i></button>
                                                                     </div>
                                                                 </div>
@@ -195,7 +195,7 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
                                                     }
                                                 } ?>
                                         </div>
-                                    
+
                                 </div>
     </div>
     <?php
