@@ -1,0 +1,21 @@
+[28-Sep-2020 18:42:19 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 18:48:29 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 18:52:02 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 18:52:29 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 18:53:02 Europe/Istanbul] PHP Warning:  rmdir(/home/u9414702/kursarabul.com/medias/room/big/4): Dizin boş değil in /home/u9414702/kursarabul.com/admin/includes/fn_actions.php on line 502
+[28-Sep-2020 18:53:02 Europe/Istanbul] PHP Warning:  rmdir(/home/u9414702/kursarabul.com/medias/room/medium/4): Dizin boş değil in /home/u9414702/kursarabul.com/admin/includes/fn_actions.php on line 508
+[28-Sep-2020 18:53:02 Europe/Istanbul] PHP Warning:  rmdir(/home/u9414702/kursarabul.com/medias/room/small/4): Dizin boş değil in /home/u9414702/kursarabul.com/admin/includes/fn_actions.php on line 514
+[28-Sep-2020 18:53:05 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 18:54:01 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 18:54:12 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:00:35 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:00:57 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:01:39 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:05:03 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:05:11 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:11:04 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:11:51 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[28-Sep-2020 19:12:35 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[30-Sep-2020 10:48:38 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[30-Sep-2020 10:48:55 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6
+[30-Sep-2020 10:58:50 Europe/Istanbul] PHP Notice:  Undefined index: add_date in /home/u9414702/kursarabul.com/admin/modules/booking/room/custom_form.php on line 6

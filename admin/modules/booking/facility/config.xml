@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module title="[FACILITIES]" name="facility" multi="1" library="0" dashboard="0" icon="wrench" ranking="0" home="0" main="0" validation="0" dates="0" release="0" index="0.6">
+	<!-- resizing
+	[0] 1 single image
+	[1] 1x big, 1x medium, 1x small -->
+	<medias max="1" resizing="0">
+		<big maxw="32" maxh="32"/>
+		<medium maxw="400" maxh="300"/>
+		<small maxw="200" maxh="150"/>
+	</medias>
+	<list order="name">
+		<col label="[NAME]" name="name" type="none"/>
+	</list>
+	<form>
+		<field multi="1" label="[NAME]" name="name" type="text" required="1" unique="0" validation="none"/>
+		<field multi="0" label="Kategori" name="category" type="select" required="0" unique="0" validation="none">
+            <options>
+                <option value="fiziksel">Fiziksel İmkanlar</option>
+                <option value="hizmetler">Hizmetler</option>
+                <option value="dil">Dil Olanakları</option>
+                <option value="sportif">Sportif</option>
+                <option value="sanatsal">Sanatsal</option>
+                <option value="kulupler">Kulüpler</option>
+               
+            </options>
+        </field>
+	</form>
+    <roles>
+        <user type="administrator" permissions="all"/>
+        <user type="manager" permissions="no_access"/>
+        <user type="editor" permissions="no_access"/>
+    </roles>
+</module>
