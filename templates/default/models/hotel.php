@@ -260,7 +260,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 <div class="share-holder fixed-scroll-column-share-container">
                                                     <div class="share-container  isShare"></div>
                                                 </div>
-                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Yorum Ekle </span></a>
+                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Yorum Yap </span></a>
                                                 <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Kaydet</span></a>
                                                 <form action="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" method="post">
                                                 <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
