@@ -135,16 +135,7 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
                                                 <?php
                                             }else{
                                                 ?>
-                                                <div class="listsearch-input-item ">
-                                                    <select name="destination_id" data-placeholder="City" name="destination_id" class="chosen-select">
-                                                        <option value="0"><?php echo 'Şehirler'; ?></option>
-                                                        <?php
-                                                        foreach($result_search_destination as $row){
-                                                            $selected = (isset($_SESSION['destination_id']) && $_SESSION['destination_id'] == $row['id']) ? ' selected="selected"' : '';
-                                                            echo '<option value="'.$row['id'].'"'.$selected.'>'.$row['name'].'</option>';
-                                                        } ?>
-                                                    </select>
-                                                </div>
+                                                
                                                     <?php
                                                 } ?>
 
