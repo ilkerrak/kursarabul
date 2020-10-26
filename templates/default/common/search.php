@@ -157,7 +157,7 @@ $to_date = (isset($_SESSION['to_date'])) ? $_SESSION['to_date'] : ''; ?>
 
 
                                         <div class="main-search-input-item main-date-parent main-search-input-item_small">
-                                            <span class="inpt_dec"><i class="fas fa-calendar-check"></i></span> <input style="background:#f7f9fb !important;" type="text" placeholder="Aradığınız Kurs Merkezini Yazın"  id="autocompleteid3"   value=""/>
+                                            <span class="inpt_dec"><i class=""></i></span> <input style="background:#f7f9fb !important;" type="text" placeholder="Aradığınız Kurs Merkezini Yazın"  id="autocompleteid3"   value=""/>
                                         </div>
 
                                         <?php
