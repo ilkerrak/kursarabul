@@ -264,7 +264,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Kaydet</span></a>
                                                 <form action="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" method="post">
                                                 <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
-                                                <a class="fc-button" href="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" name="check_availabilities"><i class="far fa-bookmark"></i> <span> Rezervasyon </span></a>
+                                                <a class="fc-button" href="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" name="check_availabilities"><i class="far fa-bookmark"></i> <span> Rezervasyon  </span></a>
                                                 </form>
                                             </div>
                                         </div>
