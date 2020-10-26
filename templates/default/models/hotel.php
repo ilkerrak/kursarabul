@@ -4,9 +4,9 @@ if($article_alias == '') err404();
 
 $result = $db->query('SELECT * FROM pm_hotel WHERE checked = 1 AND lang = '.LANG_ID.' AND alias = '.$db->quote($article_alias));
 if($result !== false && $db->last_row_count() == 1){
-    
+
     $hotel = $result->fetch(PDO::FETCH_ASSOC);
-    
+
     $hotel_id = $hotel['id'];
     $hotel_lat=$hotel['lat'];
     $hotel_lng=$hotel['lng'];
@@ -16,19 +16,19 @@ if($result !== false && $db->last_row_count() == 1){
     $page_subtitle = '';
     $page_alias = $pages[$page_id]['alias'].'/'.text_format($hotel['alias']);
     $page_name = $hotel['title'];
-    
+
     $result_hotel_file = $db->query('SELECT * FROM pm_hotel_file WHERE id_item = '.$hotel_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1');
     if($result_hotel_file !== false && $db->last_row_count() > 0){
-        
+
         $row = $result_hotel_file->fetch();
-        
+
         $file_id = $row['id'];
         $filename = $row['file'];
-        
+
         if(is_file(SYSBASE.'medias/hotel/medium/'.$file_id.'/'.$filename))
             $page_img = getUrl(true).DOCBASE.'medias/hotel/medium/'.$file_id.'/'.$filename;
     }
-    
+
 }else err404();
 
 check_URI(DOCBASE.$page_alias);
@@ -74,18 +74,18 @@ require(getFromTemplate('common/header.php', false)); ?>
           document.write("Tarayıcınız Geolocation API desteklemiyor.");
         }
       }
-      
-    
+
+
       function konumuGoster(konum) {
           var lat1=konum.coords.latitude;
           var lon1=konum.coords.longitude;
-          document.cookie = "lat1="+lat1; 
-          document.cookie = "lon1="+lon1; 
+          document.cookie = "lat1="+lat1;
+          document.cookie = "lon1="+lon1;
       }
       konumuGetir();
 </script>
 <section id="page">
-    
+
     <?php #include(getFromTemplate('common/page_header.php', false)); ?>
     <div id="wrapper">
                 <!-- content-->
@@ -95,15 +95,15 @@ require(getFromTemplate('common/header.php', false)); ?>
                                 <?php
                                 if($result_hotel_file->execute() !== false && $db->last_row_count() > 0){
                                     $row = $result_hotel_file->fetch(PDO::FETCH_ASSOC);
-                                    
+
                                     $file_id = $row['id'];
                                     $filename = $row['file'];
                                     $label = $row['label'];
-                                    
+
                                     $realpath = SYSBASE.'medias/hotel/medium/'.$file_id.'/'.$filename;
                                     $thumbpath = DOCBASE.'medias/hotel/medium/'.$file_id.'/'.$filename;
                                     $zoompath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                    
+
                                     if(is_file($realpath)){
                                 ?>
                         <div class="bg par-elem "  data-bg="<?php echo $thumbpath ?>" data-scrollax="properties: { translateY: '30%' }"></div>
@@ -139,11 +139,11 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     $result_comment = $db->query('SELECT * FROM pm_comment WHERE id_item = '.$item_id.' AND item_type = \''.$item_type.'\' AND checked = 1 ORDER BY add_date DESC');
                                                     if($result_comment !== false)
                                                         $nb_comments = $db->last_row_count();
-                                                } ?> 
-                                        
+                                                } ?>
+
                                         <?php
                                                     if($nb_comments > 0){ ?>
-                                            
+
                                                 <div class="rate-class-name">
                                                 <?php
                                                     $result_rating = $db->query('SELECT count(*) as count_rating, AVG(rating) as avg_rating FROM pm_comment WHERE item_type = \'hotel\' AND id_item = '.$hotel_id.' AND checked = 1 AND rating > 0 AND rating <= 5');
@@ -151,7 +151,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         $row = $result_rating->fetch();
                                                         $hotel_rating = $row['avg_rating'];
                                                         $count_rating = $row['count_rating'];
-                                                        
+
                                                         if($hotel_rating > 0 && $hotel_rating <= 5){ ?>
                                                         <?php if($hotel_rating == 5){ ?>
                                                          <div class="score"><strong>Çok İyi</strong> <?php
@@ -164,13 +164,13 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                           }
                                                         if($hotel_rating <= 2){ ?>
                                                          <div class="score"><strong>Kötü</strong> <?php
-                                                         }    
+                                                         }
                                                 echo $nb_comments;?> Yorum </div>
-                                                 
-                                                        
-                                                          
-                                                    <span><?php echo round($hotel_rating); ?></span>  
-                                                                                               
+
+
+
+                                                    <span><?php echo round($hotel_rating); ?></span>
+
                                                 </div>
                                                 <?php
                                                         }
@@ -178,22 +178,22 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     <?php }
                                                     else { ?>
                                                     <div class="score">
-                                                        <span><?php echo 'Herhangi bir Yorum Yapılmamıştır.'; ?></span>  
-                                                    </div>   
+                                                        <span><?php echo 'Herhangi bir Yorum Yapılmamıştır.'; ?></span>
+                                                    </div>
                                                     <?php }
                                                     ?>
                                                 <!-- list-single-hero-rating-list-->
-                                              
+
                                                 <!-- list-single-hero-rating-list end-->
                                             </div>
                                             <!--  list-single-hero-rating  end-->
                                             <div class="clearfix"></div>
                                             <!-- list-single-hero-links-->
                                             <div class="list-single-hero-links">
-                                           
+
                                                 <a class="custom-scroll-link lisd-link" href="#sec6"><i class="fal fa-comment-alt-check"></i>Yorum Yap</a>
                                             </div>
-                                            <!--  list-single-hero-links end-->                                            
+                                            <!--  list-single-hero-links end-->
                                         </div>
                                         <!--  list-single-hero-details  end-->
                                     </div>
@@ -245,7 +245,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                 <a href="#" class="show-hidden-map">  <span>Haritada Gör</span> <i class="fal fa-map-marked-alt"></i></a>
                             </div>
                         </div>
-                        <!--  scroll-nav-wrapper end  -->                    
+                        <!--  scroll-nav-wrapper end  -->
                         <!--   container  -->
                         <div class="container">
                             <!--   row  -->
@@ -256,15 +256,15 @@ require(getFromTemplate('common/header.php', false)); ?>
                                         <!-- fixed-scroll-column  -->
                                         <div class="fixed-scroll-column">
                                             <div class="fixed-scroll-column-item fl-wrap">
-                                                <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Share </span></div>
+                                                <div class="showshare sfcs fc-button"><i class="far fa-share-alt"></i><span>Paylaş </span></div>
                                                 <div class="share-holder fixed-scroll-column-share-container">
                                                     <div class="share-container  isShare"></div>
                                                 </div>
-                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Add review </span></a>
-                                                <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Save</span></a>
+                                                <a class="fc-button custom-scroll-link" href="#sec6"><i class="far fa-comment-alt-check"></i> <span>  Yorum Ekle </span></a>
+                                                <a class="fc-button" href="#"><i class="far fa-heart"></i> <span>Kaydet</span></a>
                                                 <form action="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" method="post">
                                                 <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
-                                                <a class="fc-button" href="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" name="check_availabilities"><i class="far fa-bookmark"></i> <span> Book Now </span></a>
+                                                <a class="fc-button" href="<?php echo DOCBASE.$sys_pages['booking']['alias']; ?>" name="check_availabilities"><i class="far fa-bookmark"></i> <span> Rezervasyon </span></a>
                                                 </form>
                                             </div>
                                         </div>
@@ -277,27 +277,27 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     $nb_image = 0;
                                                     $result_hotel_file = $db->query('SELECT * FROM pm_hotel_file WHERE id_item = '.$hotel_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 0,3');
                                                     $nb_image = $db->last_row_count();
-                                                    
-                                                    
+
+
                                                     if($result_hotel_file !== false){
-                                                        
+
                                                         foreach($result_hotel_file as $i => $row){
-                                                        
+
                                                             $file_id = $row['id'];
                                                             $filename = $row['file'];
                                                             $label = $row['label'];
-                                                            
+
                                                             $realpath = SYSBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
                                                             $thumbpath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                                            
-                                                            if((is_file($realpath)) && ($nb_image < 14 )){ 
-                                                            
-                                                                    
+
+                                                            if((is_file($realpath)) && ($nb_image < 14 )){
+
+
                                                     ?>
-                                                
+
                                                 <div class="gallery-item"style="height:150px !important;" >
                                                     <div class="grid-item-holder" style="height:150px !important;">
-                                                   
+
                                                         <div class="box-item">
                                                             <img style="height:150px !important;" src="<?php echo $thumbpath ?>"   alt="">
                                                             <a href="<?php echo $thumbpath ?>" class="gal-link popup-image"><i class="fa fa-search"></i></a>
@@ -307,33 +307,33 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         <?php }
                                                         }
                                                      }
-                                                    
+
                                                       ?>
                                                       <?php
                                                     $nb_image = 0;
                                                     $result_hotel_file = $db->query('SELECT * FROM pm_hotel_file WHERE id_item = '.$hotel_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 3,1');
                                                     $nb_image = $db->last_row_count();
-                                                    
-                                                    
+
+
                                                     if($result_hotel_file !== false){
-                                                        
+
                                                         foreach($result_hotel_file as $i => $row){
-                                                        
+
                                                             $file_id = $row['id'];
                                                             $filename = $row['file'];
                                                             $label = $row['label'];
-                                                            
+
                                                             $realpath = SYSBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
                                                             $thumbpath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                                            
-                                                            if((is_file($realpath)) && ($nb_image < 14 )){ 
-                                                            
-                                                                    
+
+                                                            if((is_file($realpath)) && ($nb_image < 14 )){
+
+
                                                     ?>
-                                                
+
                                                 <div class="gallery-item gallery-item-second" style="height:300px !important;">
                                                     <div class="grid-item-holder" style="height:300px !important;">
-                                                   
+
                                                         <div class="box-item">
                                                             <img style="height:300px !important;"src="<?php echo $thumbpath ?>"   alt="">
                                                             <a href="<?php echo $thumbpath ?>" class="gal-link popup-image"><i class="fa fa-search"></i></a>
@@ -343,33 +343,33 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         <?php }
                                                         }
                                                      }
-                                                    
+
                                                       ?>
                                                 <?php
                                                     $nb_image = 0;
                                                     $result_hotel_file = $db->query('SELECT * FROM pm_hotel_file WHERE id_item = '.$hotel_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 4,1');
                                                     $nb_image = $db->last_row_count();
-                                                    
-                                                    
+
+
                                                     if($result_hotel_file !== false){
-                                                        
+
                                                         foreach($result_hotel_file as $i => $row){
-                                                        
+
                                                             $file_id = $row['id'];
                                                             $filename = $row['file'];
                                                             $label = $row['label'];
-                                                            
+
                                                             $realpath = SYSBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
                                                             $thumbpath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                                            
-                                                            if((is_file($realpath)) && ($nb_image < 14 )){ 
-                                                            
-                                                                    
+
+                                                            if((is_file($realpath)) && ($nb_image < 14 )){
+
+
                                                     ?>
-                                                
+
                                                 <div class="gallery-item" style="height:150px !important;">
                                                     <div class="grid-item-holder" style="height:150px !important;">
-                                                   
+
                                                         <div class="box-item">
                                                             <img style="height:150px !important;"src="<?php echo $thumbpath ?>"   alt="">
                                                             <a href="<?php echo $thumbpath ?>" class="gal-link popup-image"><i class="fa fa-search"></i></a>
@@ -379,33 +379,33 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         <?php }
                                                         }
                                                      }
-                                                    
+
                                                       ?>
                                                       <?php
                                                     $nb_image = 0;
                                                     $result_hotel_file = $db->query('SELECT * FROM pm_hotel_file WHERE id_item = '.$hotel_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 5,1');
                                                     $nb_image = $db->last_row_count();
-                                                    
-                                                    
+
+
                                                     if($result_hotel_file !== false){
-                                                        
+
                                                         foreach($result_hotel_file as $i => $row){
-                                                        
+
                                                             $file_id = $row['id'];
                                                             $filename = $row['file'];
                                                             $label = $row['label'];
-                                                            
+
                                                             $realpath = SYSBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
                                                             $thumbpath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                                            
-                                                            if((is_file($realpath)) && ($nb_image < 14 )){ 
-                                                            
-                                                                    
+
+                                                            if((is_file($realpath)) && ($nb_image < 14 )){
+
+
                                                     ?>
-                                                
+
                                                 <div class="gallery-item" style="height:150px !important;">
                                                     <div class="grid-item-holder" style="height:150px !important;">
-                                                   
+
                                                         <div class="box-item">
                                                             <img style="height:150px !important;"src="<?php echo $thumbpath ?>"   alt="">
                                                             <a href="<?php echo $thumbpath ?>" class="gal-link popup-image"><i class="fa fa-search"></i></a>
@@ -413,28 +413,28 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     $nb_image = 0;
                                                     $result_hotel_file = $db->query('SELECT * FROM pm_hotel_file WHERE id_item = '.$hotel_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank ');
                                                     $nb_image = $db->last_row_count();
-                                                    
-                                                    
+
+
                                                     if($result_hotel_file !== false){
-                                                        
+
                                                         foreach($result_hotel_file as $i => $row){
-                                                        
+
                                                             $file_id = $row['id'];
                                                             $filename = $row['file'];
                                                             $label = $row['label'];
-                                                            
+
                                                             $realpath = SYSBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
                                                             $thumbpath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                                            
-                                                            if((is_file($realpath)) && ($nb_image < 14 )){ 
-                                                            
-                                                                    
+
+                                                            if((is_file($realpath)) && ($nb_image < 14 )){
+
+
                                                     ?>
                                                             <div class="more-photos-button dynamic-gal"  data-dynamicPath="[{'src': '<?php echo $thumbpath ?>'}]">Diğer <span>Resimler</span><i class="far fa-long-arrow-right"></i></div>
                                                             <?php }
                                                         }
                                                      }
-                                                    
+
                                                       ?>
                                                         </div>
                                                     </div>
@@ -442,13 +442,13 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         <?php }
                                                         }
                                                      }
-                                                    
+
                                                       ?>
-                                               
-                                                
+
+
                                                 <!-- 7 end -->
                                             </div>
-                                            <!-- end gallery items -->                                          
+                                            <!-- end gallery items -->
                                         </div>
                                         <!-- list-single-header end -->
                                         <div class="list-single-facts fl-wrap">
@@ -503,7 +503,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     <h6></h6>
                                                 </div>
                                             </div>
-                                            <!-- inline-facts end -->                                                                        
+                                            <!-- inline-facts end -->
                                         </div>
                                         <!--   list-single-main-item -->
                                         <div class="list-single-main-item fl-wrap"  id="sec2">
@@ -512,7 +512,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                             </div>
                                                <p><?php
                                                 echo $hotel['descr'];
-                                                
+
                                                 $short_text = strtrunc(strip_tags($hotel['descr']), 100);
                                                 $site_url = getUrl(); ?></p>
                                             <a href="https://vimeo.com/70851162" class="btn flat-btn color-bg big-btn float-btn image-popup">Video <i class="fal fa-play"></i></a>
@@ -532,34 +532,34 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $facility_id 	= $row['id'];
                                                             $facility_name  = $row['name'];
                                                             $facility_category  = $row['category'];
-                                                            
+
                                                             $result_facility_file = $db->query('SELECT * FROM pm_facility_file WHERE id_item = '.$facility_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1',PDO::FETCH_ASSOC);
                                                             if($result_facility_file !== false && $db->last_row_count() == 1){
                                                                 $row = $result_facility_file->fetch();
-                                                                
+
                                                                 $file_id 	= $row['id'];
                                                                 $filename 	= $row['file'];
                                                                 $label	 	= $row['label'];
-                                                                
+
                                                                 $realpath	= SYSBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                                 $thumbpath	= DOCBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                             if ($facility_category == 'fiziksel'){
                                                                 if(is_file($realpath)){ ?>
-                                                                        
+
                                                                         <li>
                                                                         <img alt="<?php echo $facility_name; ?>" title="<?php echo $facility_name; ?>" src="<?php echo $thumbpath; ?>"><?php echo $facility_name; ?>
-                                                                        </li>                                                   
+                                                                        </li>
                                                                          <?php
                                                                 }
-                                                            } 
+                                                            }
                                                         }
-                                                            
+
                                                         }
                                                     } ?>
                                                 </ul>
                                             </div>
 
-                                            
+
                                         <div class="list-single-main-item-title fl-wrap">
                                                 <h3>Hizmetler</h3>
                                         </div>
@@ -572,27 +572,27 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $facility_id 	= $row['id'];
                                                             $facility_name  = $row['name'];
                                                             $facility_category  = $row['category'];
-                                                            
+
                                                             $result_facility_file = $db->query('SELECT * FROM pm_facility_file WHERE id_item = '.$facility_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1',PDO::FETCH_ASSOC);
                                                             if($result_facility_file !== false && $db->last_row_count() == 1){
                                                                 $row = $result_facility_file->fetch();
-                                                                
+
                                                                 $file_id 	= $row['id'];
                                                                 $filename 	= $row['file'];
                                                                 $label	 	= $row['label'];
-                                                                
+
                                                                 $realpath	= SYSBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                                 $thumbpath	= DOCBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                             if ($facility_category == 'hizmetler'){
                                                                 if(is_file($realpath)){ ?>
-                                                                        
+
                                                                         <li><img alt="<?php echo $facility_name; ?>" title="<?php echo $facility_name; ?>" src="<?php echo $thumbpath; ?>"><?php echo $facility_name; ?>
-                                                                        </li>                                             
+                                                                        </li>
                                                                                <?php
                                                                 }
-                                                            } 
+                                                            }
                                                         }
-                                                            
+
                                                         }
                                                     } ?>
                                                 </ul>
@@ -609,27 +609,27 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $facility_id 	= $row['id'];
                                                             $facility_name  = $row['name'];
                                                             $facility_category  = $row['category'];
-                                                            
+
                                                             $result_facility_file = $db->query('SELECT * FROM pm_facility_file WHERE id_item = '.$facility_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1',PDO::FETCH_ASSOC);
                                                             if($result_facility_file !== false && $db->last_row_count() == 1){
                                                                 $row = $result_facility_file->fetch();
-                                                                
+
                                                                 $file_id 	= $row['id'];
                                                                 $filename 	= $row['file'];
                                                                 $label	 	= $row['label'];
-                                                                
+
                                                                 $realpath	= SYSBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                                 $thumbpath	= DOCBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                             if ($facility_category == 'dil'){
                                                                 if(is_file($realpath)){ ?>
-                                                                        
+
                                                                         <li>
                                                                         <img alt="<?php echo $facility_name; ?>" title="<?php echo $facility_name; ?>" src="<?php echo $thumbpath; ?>"><?php echo $facility_name; ?>
                                                                         </li>                                                    <?php
                                                                 }
-                                                            } 
+                                                            }
                                                         }
-                                                            
+
                                                         }
                                                     } ?>
                                                 </ul>
@@ -646,28 +646,28 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $facility_id 	= $row['id'];
                                                             $facility_name  = $row['name'];
                                                             $facility_category  = $row['category'];
-                                                            
+
                                                             $result_facility_file = $db->query('SELECT * FROM pm_facility_file WHERE id_item = '.$facility_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1',PDO::FETCH_ASSOC);
                                                             if($result_facility_file !== false && $db->last_row_count() == 1){
                                                                 $row = $result_facility_file->fetch();
-                                                                
+
                                                                 $file_id 	= $row['id'];
                                                                 $filename 	= $row['file'];
                                                                 $label	 	= $row['label'];
-                                                                
+
                                                                 $realpath	= SYSBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                                 $thumbpath	= DOCBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                             if ($facility_category == 'sanatsal'){
                                                                 if(is_file($realpath)){ ?>
-                                                                        
+
                                                                             <li>
                                                                             <img alt="<?php echo $facility_name; ?>" title="<?php echo $facility_name; ?>" src="<?php echo $thumbpath; ?>"><?php echo $facility_name; ?>
                                                                         </li>
                                                                             <?php
                                                                 }
-                                                            } 
+                                                            }
                                                         }
-                                                            
+
                                                         }
                                                     } ?>
                                                 </ul>
@@ -684,28 +684,28 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         $facility_id 	= $row['id'];
                                                         $facility_name  = $row['name'];
                                                         $facility_category  = $row['category'];
-                                                        
+
                                                         $result_facility_file = $db->query('SELECT * FROM pm_facility_file WHERE id_item = '.$facility_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1',PDO::FETCH_ASSOC);
                                                         if($result_facility_file !== false && $db->last_row_count() == 1){
                                                             $row = $result_facility_file->fetch();
-                                                            
+
                                                             $file_id 	= $row['id'];
                                                             $filename 	= $row['file'];
                                                             $label	 	= $row['label'];
-                                                            
+
                                                             $realpath	= SYSBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                             $thumbpath	= DOCBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                         if ($facility_category == 'sportif'){
                                                             if(is_file($realpath)){ ?>
-                                                                    
+
                                                                         <li>
                                                                         <img alt="<?php echo $facility_name; ?>" title="<?php echo $facility_name; ?>" src="<?php echo $thumbpath; ?>"><?php echo $facility_name; ?>
                                                                     </li>
                                                                         <?php
                                                             }
-                                                        } 
+                                                        }
                                                     }
-                                                        
+
                                                     }
                                                 } ?>
                                                 </ul>
@@ -722,28 +722,28 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         $facility_id 	= $row['id'];
                                                         $facility_name  = $row['name'];
                                                         $facility_category  = $row['category'];
-                                                        
+
                                                         $result_facility_file = $db->query('SELECT * FROM pm_facility_file WHERE id_item = '.$facility_id.' AND checked = 1 AND lang = '.DEFAULT_LANG.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1',PDO::FETCH_ASSOC);
                                                         if($result_facility_file !== false && $db->last_row_count() == 1){
                                                             $row = $result_facility_file->fetch();
-                                                            
+
                                                             $file_id 	= $row['id'];
                                                             $filename 	= $row['file'];
                                                             $label	 	= $row['label'];
-                                                            
+
                                                             $realpath	= SYSBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                             $thumbpath	= DOCBASE.'medias/facility/big/'.$file_id.'/'.$filename;
                                                         if ($facility_category == 'kulupler'){
                                                             if(is_file($realpath)){ ?>
-                                                                    
+
                                                                         <li>
                                                                         <img alt="<?php echo $facility_name; ?>" title="<?php echo $facility_name; ?>" src="<?php echo $thumbpath; ?>"><?php echo $facility_name; ?>
                                                                      </li>
                                                                         <?php
                                                             }
-                                                        } 
+                                                        }
                                                     }
-                                                        
+
                                                     }
                                                 } ?>
                                                 </ul>
@@ -754,10 +754,10 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 <h3>Etiketler</h3>
                                             </div>
                                             <div class="list-single-tags tags-stylwrap">
-                                                                                                                            
+
                                             </div>
                                         </div>
-                                        <!--   list-single-main-item end -->     
+                                        <!--   list-single-main-item end -->
                                         <!-- accordion-->
                                         <div class="accordion mar-top">
                                             <a class="toggle act-accordion" href="#"> Neden Bizi Seçmelisiniz?  <span></span></a>
@@ -773,7 +773,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 <p> <?php echo $hotel['sss3']; ?></p>
                                             </div>
                                         </div>
-                                        <!-- accordion end -->                                                     
+                                        <!-- accordion end -->
                                         <!--   list-single-main-item -->
                                         <div class="list-single-main-item fl-wrap" id="sec4">
                                             <div class="list-single-main-item-title fl-wrap">
@@ -788,18 +788,18 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     $room_facilities = '0';
                                                     $result_facility = $db->prepare('SELECT * FROM pm_facility WHERE lang = '.LANG_ID.' AND FIND_IN_SET(id, :room_facilities) ORDER BY rank LIMIT 8');
                                                     $result_facility->bindParam(':room_facilities', $room_facilities);
-                                        
+
                                                     $id_room = 0;
                                                     $result_rate = $db->prepare('SELECT MIN(price) as price FROM pm_rate WHERE id_room = :id_room');
                                                     $result_rate->bindParam(':id_room', $id_room);
-                                                    
+
                                                     $result_room_file = $db->prepare('SELECT * FROM pm_room_file WHERE id_item = :id_room AND checked = 1 AND lang = '.LANG_ID.' AND type = \'image\' AND file != \'\' ORDER BY rank');
                                                     $result_room_file->bindParam(':id_room', $id_room, PDO::PARAM_STR);
-                                            
+
                                                     $result_room = $db->query('SELECT * FROM pm_room WHERE id_hotel = '.$hotel_id.' AND checked = 1 AND lang = '.LANG_ID.' ORDER BY rank', PDO::FETCH_ASSOC);
                                                     if($result_room !== false && $db->last_row_count() > 0){ ?>
-                                                       
-                                                        
+
+
                                                         <?php
                                                         foreach($result_room as $i => $row){
                                                             $id_room = $row['id'];
@@ -809,24 +809,24 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $room_alias = $row['alias'];
                                                             $room_facilities = $row['facilities'];
                                                             $max_people = $row['max_people'];
-                                                            $room_price = $row['price']; 
+                                                            $room_price = $row['price'];
                                              ?>
                                             <div class="rooms-container fl-wrap">
                                                 <!--  rooms-item -->
-                                                
+
                                                 <div class="rooms-item fl-wrap">
                                                 <?php
                                             $result_room_file->execute();
                                             if($result_room_file !== false && $db->last_row_count() > 0){
                                                 $row = $result_room_file->fetch(PDO::FETCH_ASSOC);
-                                                
+
                                                 $file_id = $row['id'];
                                                 $filename = $row['file'];
                                                 $label = $row['label'];
-                                                
+
                                                 $realpath = SYSBASE.'medias/room/small/'.$file_id.'/'.$filename;
                                                 $thumbpath = DOCBASE.'medias/room/small/'.$file_id.'/'.$filename;
-                                                    
+
                                                 if(is_file($realpath)){ ?>
                                                     <div class="rooms-media">
                                                         <img src="<?php echo $thumbpath; ?>" alt="">
@@ -845,7 +845,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             } ?>
                                                             <span class="rooms-price"> <?php echo formatPrice($min_price*CURRENCY_RATE); ?> <strong> / Yıllık</strong></span>
                                                             <h3><?php echo $room_title; ?></h3>
-                                                            
+
                                                         </div>
                                                         <p><?php echo $room_descr; ?></p>
                                                         <div class="facilities-list fl-wrap">
@@ -862,7 +862,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 </div>
                                                 <!--  rooms-item end -->
                                                 <!--  rooms-item -->
-                                                     
+
                                             </div>
                                             <?php
                                                     }
@@ -870,7 +870,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                            <!--   rooms-container end -->
                                         </div>
                                         <!-- list-single-main-item end -->
-                                        <!-- list-single-main-item -->  
+                                        <!-- list-single-main-item -->
                                         <?php
                                                 $nb_comments = 0;
                                                 $item_type = 'hotel';
@@ -881,18 +881,18 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     $result_comment = $db->query('SELECT * FROM pm_comment WHERE id_item = '.$item_id.' AND item_type = \''.$item_type.'\' AND checked = 1 ORDER BY add_date DESC');
                                                     if($result_comment !== false)
                                                         $nb_comments = $db->last_row_count();
-                                                } ?> 
-                                        
-                                                 
-                                        <!-- list-single-main-item end -->   
-                                        <!-- list-single-main-item -->   
+                                                } ?>
+
+
+                                        <!-- list-single-main-item end -->
+                                        <!-- list-single-main-item -->
                                         <div class="list-single-main-item fl-wrap" id="sec6">
                                             <div class="list-single-main-item-title fl-wrap">
-                                            
+
                                                 <h3>Yorum Yap</h3>
                                             </div>
                                             <!-- Add Review Box -->
-                                            <?php 
+                                            <?php
                                             if($allow_comment == 1 && $result_comment !== false && $item_id > 0 && isset($item_type)){
                                             ?>
                                             <div id="add-review" class="add-review-box">
@@ -908,7 +908,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="4">
                                                                     </div>
                                                                 </div>
-                                                                <!-- review-range-item end --> 
+                                                                <!-- review-range-item end -->
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
                                                                     <div class="range-slider-title">Ulaşım</div>
@@ -916,7 +916,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1"  value="1">
                                                                     </div>
                                                                 </div>
-                                                                <!-- review-range-item end --> 
+                                                                <!-- review-range-item end -->
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
                                                                     <div class="range-slider-title">Öğretmenler</div>
@@ -924,7 +924,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="5" >
                                                                     </div>
                                                                 </div>
-                                                                <!-- review-range-item end --> 
+                                                                <!-- review-range-item end -->
                                                                 <!-- review-range-item-->
                                                                 <div class="review-range-item">
                                                                     <div class="range-slider-title">Faaliyetler</div>
@@ -932,10 +932,10 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="3">
                                                                     </div>
                                                                 </div>
-                                                                <!-- review-range-item end -->                                     
+                                                                <!-- review-range-item end -->
                                                             </div>
                                                             <div class="review-total">
-                                                                <span><input type="text" name="rg_total" name="rating" data-form="AVG({rgcl})" value="0"></span>    
+                                                                <span><input type="text" name="rg_total" name="rating" data-form="AVG({rgcl})" value="0"></span>
                                                                 <strong>Puan</strong>
                                                             </div>
                                                         </div>
@@ -969,21 +969,21 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 <?php }?>
                                             <!-- Add Review Box / End -->
                                         </div>
-                                        <!-- list-single-main-item end -->                                    
+                                        <!-- list-single-main-item end -->
                                     </div>
                                 </div>
-                                        
-                                                    
-                                               
+
+
+
                                 <!--   datails end  -->
-                           
+
                                 <!--   sidebar  -->
                                 <div class="col-md-4">
-                                    <!--box-widget-wrap -->  
+                                    <!--box-widget-wrap -->
                                     <div class="box-widget-wrap">
                                         <!--box-widget-item -->
-                                       
-                                        <!--box-widget-item end -->                                      
+
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
                                         <!-- <div class="box-widget-item fl-wrap">
                                             <div class="box-widget counter-widget" data-countDate="09/12/2019">
@@ -1015,7 +1015,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <!--box-widget-item end -->                                       
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
                                         <div class="box-widget-item fl-wrap">
                                             <div class="box-widget">
@@ -1042,7 +1042,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--box-widget-item end -->                          
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
                                         <div class="box-widget-item fl-wrap">
                                             <div class="box-widget">
@@ -1050,10 +1050,10 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     <div class="box-widget-item-header">
                                                         <h3> Fiyat Aralığı </h3>
                                                     </div>
-                                                    <?php 
+                                                    <?php
                                                         if(isset($db) && $db !== false){
-    
-                                                        
+
+
                                                             $result_rate = $db->prepare('SELECT MIN(price) as min_price FROM pm_rate WHERE id_hotel = :id_hotel');
                                                             $result_rate->bindParam(':id_hotel', $id_hotel);
 
@@ -1067,7 +1067,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $row = $result_rate->fetch();
                                                             $price = $row['min_price'];
                                                             if($price > 0) $min_price = $price;
-                                                            
+
                                                         }
                                                         $max_price = 0;
                                                         if($result_rate2->execute() !== false && $db->last_row_count() > 0){
@@ -1078,20 +1078,20 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                     ?>
                                                         <div class="claim-price-wdget-content fl-wrap">
                                                             <div class="pricerange fl-wrap"><span>Fiyat : </span> <?php echo formatPrice($min_price*CURRENCY_RATE).'-'.formatPrice($max_price*CURRENCY_RATE); ?> </div>
-                                                            
+
                                                         </div>
                                                     <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--box-widget-item end -->                             
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
                                         <div class="box-widget-item fl-wrap">
                                             <div id="weather-widget" class="gradient-bg ideaboxWeather" data-city="New York"></div>
                                         </div>
-                                        <!--box-widget-item end -->    
-                                        <!--box-widget-item end -->   
+                                        <!--box-widget-item end -->
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
                                         <div class="box-widget-item fl-wrap">
                                             <div class="box-widget widget-posts">
@@ -1113,7 +1113,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                             $dist = rad2deg($dist);
                                                             $miles = $dist * 60 * 1.1515;
                                                             $unit = strtoupper($unit);
-                                                        
+
                                                             if ($unit == "K") {
                                                             return ($miles * 1.609344);
                                                             } else if ($unit == "N") {
@@ -1132,27 +1132,27 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                         $num_records = $result->fetchColumn(0);
                                                         $lz_pages = ceil($num_records/$lz_limit);
                                                     }
-                                                    if($num_records > 0){ 
+                                                    if($num_records > 0){
                                                         if(isset($db) && $db !== false){
-    
+
                                                             $my_page_alias = $sys_pages['hotels']['alias'];
-                                                        
+
                                                             $query_hotel = 'SELECT * FROM pm_hotel WHERE lang = '.LANG_ID.' AND checked = 1 AND populer = 1';
                                                             if(isset($destination_id)) $query_hotel .= ' AND id_destination = '.$db->quote($destination_id);
                                                             if(isset($schoollevel_id)) $query_hotel .= ' AND id_schoollevel = '.$db->quote($schoollevel_id);
                                                             $query_hotel .= ' ORDER BY rank LIMIT '.($lz_offset-1)*$lz_limit.', '.$lz_limit;
                                                             $result_hotel = $db->query($query_hotel);
-                                                        
+
                                                             $id_hotel = 0;
-                                                        
+
                                                             $result_hotel_file = $db->prepare('SELECT * FROM pm_hotel_file  WHERE id_item = :id_hotel AND checked = 1 AND lang = '.LANG_ID.' AND type = \'image\' AND file != \'\' ORDER BY rank LIMIT 1');
-                                                            $result_hotel_file->bindParam(':id_hotel', $id_hotel);    
-                                                        
+                                                            $result_hotel_file->bindParam(':id_hotel', $id_hotel);
+
                                                             $result_rate = $db->prepare('SELECT MIN(price) as min_price FROM pm_rate WHERE id_hotel = :id_hotel');
                                                             $result_rate->bindParam(':id_hotel', $id_hotel);
-                                                        
+
                                                             foreach($result_hotel as $i => $row){
-                                                                                        
+
                                                                 $id_hotel = $row['id'];
                                                                 $hotel_title = $row['title'];
                                                                 $hotel_subtitle = $row['subtitle'];
@@ -1162,30 +1162,30 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                                 $hotel_address = $row['id_destination'];
                                                                 $hotel_state = $row['state'];
                                                                 $hotel_descr = $row['descr'];
-                                                        
-                                                                
+
+
                                                                 $hotel_alias = DOCBASE.$my_page_alias.'/'.text_format($hotel_alias);
-                                                                
-                                                        
-                                                                $lat1=$_COOKIE["lat1"]; 
+
+
+                                                                $lat1=$_COOKIE["lat1"];
                                                                 $lon1=$_COOKIE["lon1"];
                                                                 $lat2=$hotel_lat;
                                                                 $lon2=$hotel_lng;
                                                                 $location_echo = round(deneme($lat1, $lon1, $lat2, $lon2, "K"),0);?>
-                                                    
+
                                                             <div class="box-image-widget">
                                                             <?php
                                                             if($result_hotel_file->execute() !== false && $db->last_row_count() > 0){
                                                                 $row = $result_hotel_file->fetch(PDO::FETCH_ASSOC);
-                                                                
+
                                                                 $file_id = $row['id'];
                                                                 $filename = $row['file'];
                                                                 $label = $row['label'];
-                                                                
+
                                                                 $realpath = SYSBASE.'medias/hotel/medium/'.$file_id.'/'.$filename;
                                                                 $thumbpath = DOCBASE.'medias/hotel/medium/'.$file_id.'/'.$filename;
                                                                 $zoompath = DOCBASE.'medias/hotel/big/'.$file_id.'/'.$filename;
-                                                                
+
                                                                 if(is_file($realpath)){ ?>
                                                                 <div class="box-image-widget-media"><img src="<?php echo $thumbpath ?>" alt="">
                                                                     <a href="<?php echo $hotel_alias ?>" class="color2-bg" target="_blank">Detay</a>
@@ -1194,7 +1194,7 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                                 } ?>
                                                                 <div class="box-image-widget-details">
                                                                     <h4><?php echo $hotel_title ?> <span><?php echo $location_echo.'km yakınında'; ?></span></h4>
-                                                                   
+
                                                                 </div>
                                                             </div>
                                                         <?php }
@@ -1205,14 +1205,14 @@ require(getFromTemplate('common/header.php', false)); ?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--box-widget-item end -->                           
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
-                                        
-                                        <!--box-widget-item end -->                              
+
+                                        <!--box-widget-item end -->
                                         <!--box-widget-item -->
-                                        <!--box-widget-item end -->                            
+                                        <!--box-widget-item end -->
                                     </div>
-                                    <!--box-widget-wrap end -->  
+                                    <!--box-widget-wrap end -->
                                 </div>
                                 <!--   sidebar end  -->
                             </div>
